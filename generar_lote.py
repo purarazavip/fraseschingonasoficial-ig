@@ -59,7 +59,7 @@ TEMPLATE = """<!doctype html>
   --ink-dim:#c9c6bd;
 }}
 *{{margin:0;padding:0;box-sizing:border-box;}}
-body{{background:var(--bg);}}
+html,body{{width:1080px;height:1080px;overflow:hidden;background:var(--bg);}}
 .canvas{{
   width:1080px;
   height:1080px;
@@ -150,6 +150,7 @@ def render_png(html_path, png_path):
             "--headless",
             "--disable-gpu",
             "--no-sandbox",
+            "--hide-scrollbars",
             "--window-size=1080,1080",
             f"--screenshot={png_path}",
             f"file:///{win_html_path}",
