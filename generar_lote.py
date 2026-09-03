@@ -12,7 +12,12 @@ BANCO_PATH = os.path.join(BASE, "frases_banco.json")
 USADAS_PATH = os.path.join(BASE, "usadas.json")
 FONT600 = os.path.join(BASE, "fonts", "caveat600.woff2")
 FONT700 = os.path.join(BASE, "fonts", "caveat700.woff2")
-CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+CHROME = os.environ.get(
+    "CHROME_BIN",
+    "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
+    if os.path.exists("/opt/pw-browsers/chromium-1194/chrome-linux/chrome")
+    else r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+)
 
 HASHTAGS = {
     "mujeres_empoderadas": "#mujeresempoderadas #mujerpoderosa #empoderamientofemenino #mujeresquesuperan",
@@ -144,6 +149,7 @@ def render_png(html_path, png_path):
             CHROME,
             "--headless",
             "--disable-gpu",
+            "--no-sandbox",
             "--window-size=1080,1080",
             f"--screenshot={png_path}",
             f"file:///{win_html_path}",
