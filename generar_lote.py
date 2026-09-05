@@ -46,7 +46,7 @@ HASHTAGS = {
 }
 BASE_HASHTAGS = "#fraseschingonasoficial #frasesenespanol #reflexiones #frasesdiarias"
 
-APERTURAS = [
+APERTURAS_DEFAULT = [
     "Guarda esta frase para cuando se te olvide lo que vales.",
     "Etiqueta a alguien que necesita leer esto hoy.",
     "Lee esto las veces que necesites.",
@@ -54,6 +54,143 @@ APERTURAS = [
     "Esta va dedicada a quien no se rinde.",
     "Guardala. La vas a necesitar en un mal dia.",
 ]
+
+APERTURAS_POR_CATEGORIA = {
+    "mujeres_empoderadas": [
+        "Guarda esta frase para cuando se te olvide lo que vales.",
+        "Etiqueta a una mujer que necesita leer esto hoy.",
+        "Para ti, que sigues aqui a pesar de todo.",
+    ],
+    "mujeres_cabronas": [
+        "Etiqueta a la que no se deja de nadie.",
+        "Lee esto las veces que necesites.",
+        "Esta va dedicada a la que no pide permiso.",
+    ],
+    "frases_amor": [
+        "Etiqueta a esa persona que te hace sentir esto.",
+        "Guarda esto si crees en el amor bien hecho.",
+        "Comparte esta frase con quien amas de verdad.",
+    ],
+    "frases_desamor": [
+        "Para cuando el corazon todavia esta sanando.",
+        "Guarda esta frase para tus dias dificiles.",
+        "Lee esto las veces que necesites hoy.",
+    ],
+    "frases_amor_propio": [
+        "Guarda esto para cuando se te olvide tu valor.",
+        "Lee esto antes de buscar validacion afuera.",
+        "Para ti, que estas aprendiendo a quererte mejor.",
+    ],
+    "frases_para_el_ex": [
+        "Esto es para quien ya paso pagina.",
+        "Guarda esto para cuando quieran volver a buscarte.",
+        "Para ti, que ya cerraste esa historia.",
+    ],
+    "frases_cerrar_ciclos": [
+        "Para ti, que estas cerrando un capitulo.",
+        "Guarda esta frase antes de empezar de nuevo.",
+        "Esto es para quien esta soltando lo que ya no sirve.",
+    ],
+    "frases_relaciones_toxicas": [
+        "Etiqueta a quien necesita leer esto hoy.",
+        "Guarda esto para reconocerlo a tiempo la proxima vez.",
+        "Para ti, que ya te alejaste de lo que te hacia mal.",
+    ],
+    "frases_indirectas": [
+        "No es para ti, pero si te quedo, es tuyo.",
+        "Etiqueta a quien le urge leer esto.",
+        "Comparte esto en tu historia si aplica.",
+    ],
+    "frases_solteros": [
+        "Para ti, que estas disfrutando tu soltería.",
+        "Etiqueta a quien esta feliz solo.",
+        "Guarda esta frase si estas en tu mejor version solo.",
+    ],
+    "frases_de_vida": [
+        "Lee esto cuando necesites perspectiva.",
+        "Guarda esta frase para los dias raros.",
+        "Para ti, que sigues entendiendo la vida sobre la marcha.",
+    ],
+    "frases_reflexion": [
+        "Lee esto despacio, dos veces si hace falta.",
+        "Guarda esta frase para pensarla bien.",
+        "Para cuando necesitas frenar y reflexionar.",
+    ],
+    "frases_superacion": [
+        "Para ti, que sigues a pesar de todo.",
+        "Guarda esta frase para tu proximo obstaculo.",
+        "Etiqueta a alguien que esta superando algo dificil.",
+    ],
+    "frases_exito": [
+        "Guarda esto para cuando dudes de tu proceso.",
+        "Para ti, que trabajas en silencio.",
+        "Lee esto antes de compararte con alguien mas.",
+    ],
+    "frases_dinero": [
+        "Guarda esto si estas trabajando en tus finanzas.",
+        "Para ti, que estas cambiando tu mentalidad de dinero.",
+        "Lee esto antes de tu proxima decision financiera.",
+    ],
+    "frases_mentalidad_fuerte": [
+        "Guarda esta frase para tus dias dificiles.",
+        "Para ti, que no te rindes aunque cueste.",
+        "Lee esto cuando necesites reforzar tu mentalidad.",
+    ],
+    "frases_disciplina": [
+        "Guarda esto para cuando no tengas ganas de seguir.",
+        "Para ti, que eliges la constancia sobre la motivacion.",
+        "Etiqueta a tu compañero de disciplina.",
+    ],
+    "frases_amistad": [
+        "Etiqueta a esa persona que es tu amistad real.",
+        "Guarda esto para agradecerle a un buen amigo.",
+        "Comparte esto con quien vale la pena.",
+    ],
+    "frases_familia": [
+        "Etiqueta a tu familia o a quien consideras tu familia.",
+        "Guarda esta frase para recordarselo a los tuyos.",
+        "Comparte esto con quien te hace sentir en casa.",
+    ],
+    "frases_tristeza_dolor": [
+        "Esta bien no estar bien, lee esto con calma.",
+        "Para ti, que estas en un dia dificil.",
+        "Guarda esta frase para cuando lo necesites.",
+    ],
+    "frases_paz_mental": [
+        "Guarda esto para cuando necesites calma.",
+        "Para ti, que estas priorizando tu paz.",
+        "Lee esto antes de reaccionar de mas.",
+    ],
+}
+
+CIERRES_DEFAULT = [
+    "¿Te identificas con esto? Cuentamelo en los comentarios 👇",
+    "Guarda esta frase para cuando la necesites 💾",
+]
+
+CIERRES_POR_CATEGORIA = {
+    "mujeres_empoderadas": ["Etiqueta a una mujer que necesita leer esto hoy 💪"],
+    "mujeres_cabronas": ["Etiqueta a la que no se deja de nadie 💅"],
+    "frases_amor": ["¿Sientes que esto describe lo tuyo? Cuentamelo 👇"],
+    "frases_desamor": ["¿Ya lo superaste o sigues en el proceso? Dimelo abajo 👇"],
+    "frases_amor_propio": ["Guarda esto para cuando se te olvide tu valor 💛"],
+    "frases_para_el_ex": ["¿Te ha pasado? Cuentamelo en los comentarios 👇"],
+    "frases_cerrar_ciclos": ["¿Que ciclo estas cerrando tu? Cuentamelo 👇"],
+    "frases_relaciones_toxicas": ["Etiqueta a quien necesita leer esto 👀"],
+    "frases_indirectas": ["¿A quien se la mandas? Etiqueta a esa persona 👀"],
+    "frases_solteros": ["¿Team solteria o team pareja? Dimelo en los comentarios 👇"],
+    "frases_de_vida": ["¿Te identificas con esto? Cuentamelo en los comentarios 👇"],
+    "frases_reflexion": ["¿Que opinas de esto? Te leo en los comentarios 👇"],
+    "frases_superacion": ["¿Ya diste tu paso de hoy? Cuentamelo 💪"],
+    "frases_exito": ["¿Cual es tu meta de este mes? Compartela 👇"],
+    "frases_dinero": ["¿Cual es tu meta financiera este año? Compartela 👇"],
+    "frases_mentalidad_fuerte": ["¿Te identificas con esto? Cuentamelo en los comentarios 👇"],
+    "frases_disciplina": ["¿Ya cumpliste tu meta de hoy? Cuentamelo 💪"],
+    "frases_amistad": ["Etiqueta a esa persona que es como familia para ti 🤍"],
+    "frases_familia": ["Etiqueta a tu familia o a quien consideras tu familia 🏡"],
+    "frases_tristeza_dolor": ["¿Como estas hoy? A veces ayuda decirlo 👇"],
+    "frases_paz_mental": ["¿Que haces tu para mantener la calma? Cuentame 👇"],
+}
 
 ROTATIONS = [
     "rotate(-2.2deg) translateX(-8px)",
@@ -239,9 +376,10 @@ def main():
             f.write(html)
         render_png(html_path, png_path)
 
-        apertura = random.choice(APERTURAS)
+        apertura = random.choice(APERTURAS_POR_CATEGORIA.get(cat, APERTURAS_DEFAULT))
+        cierre = random.choice(CIERRES_POR_CATEGORIA.get(cat, CIERRES_DEFAULT))
         hashtags = f"{BASE_HASHTAGS} {HASHTAGS.get(cat, '')}".strip()
-        caption = f"{apertura}\n\n\"{frase}\"\n\n{hashtags}"
+        caption = f"{apertura}\n\n\"{frase}\"\n\n{cierre}\n\n{hashtags}"
         caption_path = os.path.join(out_dir, f"post_{i}_caption.txt")
         with open(caption_path, "w", encoding="utf-8") as f:
             f.write(caption)
