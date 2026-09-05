@@ -23,16 +23,35 @@ HASHTAGS = {
     "mujeres_empoderadas": "#mujeresempoderadas #mujerpoderosa #empoderamientofemenino #mujeresquesuperan",
     "mujeres_cabronas": "#mujerescabronas #actitud #reinacabrona #nomeimporta",
     "frases_motivacionales": "#frasesmotivadoras #motivacion #exito #disciplina",
-    "fuerza": "#fuerzainterior #mujeresfuertes #resiliencia #levantate",
+    "fuerza": "#fuerzainterior #resiliencia #levantate #mentalidadfuerte",
+    "frases_amor": "#frasesdeamor #amor #relacionessanas #pareja",
+    "frases_desamor": "#frasesdedesamor #desamor #corazonroto #superarundesamor",
+    "frases_amor_propio": "#amorpropio #autoestima #confianzaentiuno #valorati",
+    "frases_para_el_ex": "#frasesparaelex #superarunex #indiferencia #pasadopasado",
+    "frases_cerrar_ciclos": "#cerrarciclos #nuevocomienzo #soltar #empezardenuevo",
+    "frases_relaciones_toxicas": "#relacionestoxicas #personasfalsas #traicion #alejatedelotoxico",
+    "frases_indirectas": "#indirectas #frasesconindirectas #paraquiencorresponda #diagnostico",
+    "frases_solteros": "#soltero #soltera #solteriafeliz #libertadsentimental",
+    "frases_de_vida": "#frasesdevida #vidareal #reflexiondevida #karma",
+    "frases_reflexion": "#reflexion #frasesparapensar #frasesprofundas #pensamientos",
+    "frases_superacion": "#superacion #crecimientopersonal #superarseasimismo #nuncatedetengas",
+    "frases_exito": "#exito #mentalidaddeexito #disciplina #metas",
+    "frases_dinero": "#dinero #mentalidadfinanciera #libertadfinanciera #inversion",
+    "frases_mentalidad_fuerte": "#mentalidadfuerte #caracter #actitud #personasfuertes",
+    "frases_disciplina": "#disciplina #gym #fitness #habitos",
+    "frases_amistad": "#frasesdeamistad #amigos #lealtad #amistadverdadera",
+    "frases_familia": "#frasesdefamilia #familia #hogar #union",
+    "frases_tristeza_dolor": "#tristeza #dolor #sanar #saludmental",
+    "frases_paz_mental": "#pazmental #saludmental #calma #bienestaremocional",
 }
-BASE_HASHTAGS = "#fraseschingonasoficial #frasesenespanol #frasesparamujeres #reflexiones"
+BASE_HASHTAGS = "#fraseschingonasoficial #frasesenespanol #reflexiones #frasesdiarias"
 
 APERTURAS = [
-    "Guarda esta frase para cuando se te olvide lo chingona que eres.",
+    "Guarda esta frase para cuando se te olvide lo que vales.",
     "Etiqueta a alguien que necesita leer esto hoy.",
     "Lee esto las veces que necesites.",
     "Para ti, que sigues aqui a pesar de todo.",
-    "Esta va dedicada a la que no se rinde.",
+    "Esta va dedicada a quien no se rinde.",
     "Guardala. La vas a necesitar en un mal dia.",
 ]
 
