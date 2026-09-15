@@ -215,10 +215,10 @@ TEMPLATE = """<!doctype html>
   --ink-dim:#c9c6bd;
 }}
 *{{margin:0;padding:0;box-sizing:border-box;}}
-html,body{{width:1080px;height:1080px;overflow:hidden;background:var(--bg);}}
+html,body{{width:1080px;height:1920px;overflow:hidden;background:var(--bg);}}
 .canvas{{
   width:1080px;
-  height:1080px;
+  height:1920px;
   background:var(--bg);
   position:relative;
   display:flex;
@@ -307,7 +307,7 @@ def render_png(html_path, png_path):
             "--disable-gpu",
             "--no-sandbox",
             "--hide-scrollbars",
-            "--window-size=1080,1080",
+            "--window-size=1080,1920",
             f"--screenshot={png_path}",
             f"file:///{win_html_path}",
         ],
