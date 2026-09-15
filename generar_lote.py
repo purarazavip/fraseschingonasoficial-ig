@@ -10,6 +10,8 @@ from datetime import date
 BASE = os.path.dirname(os.path.abspath(__file__))
 BANCO_PATH = os.path.join(BASE, "frases_banco.json")
 USADAS_PATH = os.path.join(BASE, "usadas.json")
+FACTOS_BANCO_PATH = os.path.join(BASE, "factos_banco.json")
+USADAS_FACTOS_PATH = os.path.join(BASE, "usadas_factos.json")
 FONT600 = os.path.join(BASE, "fonts", "caveat600.woff2")
 FONT700 = os.path.join(BASE, "fonts", "caveat700.woff2")
 CHROME = os.environ.get(
@@ -45,6 +47,21 @@ HASHTAGS = {
     "frases_paz_mental": "#pazmental #saludmental #calma #bienestaremocional",
 }
 BASE_HASHTAGS = "#fraseschingonasoficial #frasesenespanol #reflexiones #frasesdiarias"
+FACTO_HASHTAGS = "#datocurioso #dato #sabiasque #curiosidades"
+
+HOOK_FACTOS = [
+    "Voy a tirar un facto...",
+    "Aqui va un dato que no sabias...",
+    "Dato curioso del dia...",
+    "Esto no te lo esperabas...",
+    "¿Sabias esto?",
+]
+
+APERTURAS_FACTO_CAPTION = [
+    "Te lo dije, aqui va el facto del dia.",
+    "Dato curioso que te va a servir.",
+    "Guarda este dato para cuando lo necesites.",
+]
 
 APERTURAS_DEFAULT = [
     "Guarda esta frase para cuando se te olvide lo que vales.",
@@ -258,6 +275,75 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:var(--bg);}}
 </div>
 """
 
+SQUARE_TEMPLATE = """<!doctype html>
+<title>post</title>
+<style>
+@font-face {{
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 600;
+  src: url(data:font/woff2;base64,{font_b64}) format('woff2');
+}}
+:root{{
+  --bg:#fffdfb;
+  --ink:#e21f2d;
+  --ink-dim:#e79aa0;
+}}
+*{{margin:0;padding:0;box-sizing:border-box;}}
+html,body{{width:1080px;height:1080px;overflow:hidden;background:var(--bg);}}
+.canvas{{
+  width:1080px;
+  height:1080px;
+  background:var(--bg);
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}}
+.quote{{
+  font-family:'Caveat',cursive;
+  color:var(--ink);
+  font-size:{font_size}px;
+  font-weight:600;
+  text-align:center;
+  line-height:1.32;
+  max-width:820px;
+}}
+.quote .l{{ display:block; }}
+{rotation_css}
+.hint{{
+  position:absolute;
+  bottom:170px;
+  left:0; right:0;
+  text-align:center;
+  font-family:'Caveat',cursive;
+  font-weight:600;
+  font-size:36px;
+  color:var(--ink-dim);
+}}
+.handle{{
+  position:absolute;
+  bottom:88px;
+  left:0;
+  right:0;
+  text-align:center;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:14px;
+  letter-spacing:5px;
+  color:var(--ink);
+  font-weight:400;
+}}
+</style>
+<div class="canvas">
+  <div class="quote">
+    {lines_html}
+  </div>
+  {hint_html}
+  <div class="handle">@FRASESCHINGONASOFICIAL</div>
+</div>
+"""
+
 
 def wrap_quote(text, width=22):
     lines = textwrap.wrap(text, width=width, break_long_words=False)
@@ -316,6 +402,47 @@ def render_png(html_path, png_path):
     )
 
 
+def build_square_html(text, hint=None, width=22):
+    lines = wrap_quote(text, width=width)
+    font_size = font_size_for(lines)
+    rotation_css = ""
+    lines_html = ""
+    for i, line in enumerate(lines):
+        cls = f"l{i+1}"
+        rot = ROTATIONS[i % len(ROTATIONS)]
+        rotation_css += f".quote .{cls}{{ transform:{rot}; }}\n"
+        lines_html += f'<span class="l {cls}">{line}</span>\n'
+
+    font_b64 = base64.b64encode(open(FONT600, "rb").read()).decode("ascii")
+    hint_html = f'<div class="hint">{hint}</div>' if hint else ""
+
+    return SQUARE_TEMPLATE.format(
+        font_b64=font_b64,
+        font_size=font_size,
+        rotation_css=rotation_css,
+        lines_html=lines_html,
+        hint_html=hint_html,
+    )
+
+
+def render_square_png(html_path, png_path):
+    win_html_path = html_path.replace("\\", "/")
+    subprocess.run(
+        [
+            CHROME,
+            "--headless",
+            "--disable-gpu",
+            "--no-sandbox",
+            "--hide-scrollbars",
+            "--window-size=1080,1080",
+            f"--screenshot={png_path}",
+            f"file:///{win_html_path}",
+        ],
+        capture_output=True,
+        timeout=30,
+    )
+
+
 def load_banco():
     with open(BANCO_PATH, encoding="utf-8") as f:
         return json.load(f)
@@ -324,6 +451,84 @@ def load_banco():
 def load_usadas():
     with open(USADAS_PATH, encoding="utf-8") as f:
         return set(json.load(f))
+
+
+def load_factos():
+    with open(FACTOS_BANCO_PATH, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_usadas_factos():
+    with open(USADAS_FACTOS_PATH, encoding="utf-8") as f:
+        return set(json.load(f))
+
+
+def save_usadas_factos(usadas):
+    with open(USADAS_FACTOS_PATH, "w", encoding="utf-8") as f:
+        json.dump(sorted(usadas), f, ensure_ascii=False, indent=2)
+
+
+def pick_facto():
+    factos = load_factos()
+    usadas = load_usadas_factos()
+    disponibles = [f for f in factos if f not in usadas]
+    if not disponibles:
+        return None
+    facto = random.choice(disponibles)
+    usadas.add(facto)
+    save_usadas_factos(usadas)
+    return facto
+
+
+def build_facto_caption(fact_text):
+    hashtags = f"{BASE_HASHTAGS} {FACTO_HASHTAGS}".strip()
+    apertura = random.choice(APERTURAS_FACTO_CAPTION)
+    return (
+        f"\U0001f440 {apertura}\n\n"
+        f'"{fact_text}"\n\n'
+        f"¿Lo sabias? Cuentamelo en los comentarios \U0001f447\n\n"
+        f"{hashtags}"
+    )
+
+
+def generate_facto(out_dir):
+    fact_text = pick_facto()
+    if not fact_text:
+        print("No hay factos disponibles sin usar. Agrega mas al banco.")
+        return None
+
+    hook = random.choice(HOOK_FACTOS)
+    html_1 = build_square_html(hook, hint="Desliza para verlo »")
+    html_2 = build_square_html(fact_text)
+
+    html_1_path = os.path.join(out_dir, "facto_1.html")
+    png_1_path = os.path.join(out_dir, "facto_1.png")
+    html_2_path = os.path.join(out_dir, "facto_2.html")
+    png_2_path = os.path.join(out_dir, "facto_2.png")
+
+    with open(html_1_path, "w", encoding="utf-8") as f:
+        f.write(html_1)
+    render_square_png(html_1_path, png_1_path)
+
+    with open(html_2_path, "w", encoding="utf-8") as f:
+        f.write(html_2)
+    render_square_png(html_2_path, png_2_path)
+
+    caption = build_facto_caption(fact_text)
+    caption_path = os.path.join(out_dir, "facto_caption.txt")
+    with open(caption_path, "w", encoding="utf-8") as f:
+        f.write(caption)
+
+    print(f"[facto] {fact_text}")
+    print(f"    -> {png_1_path}")
+    print(f"    -> {png_2_path}")
+
+    return {
+        "facto": fact_text,
+        "png_1": png_1_path,
+        "png_2": png_2_path,
+        "caption_path": caption_path,
+    }
 
 
 def save_usadas(usadas):
@@ -392,6 +597,10 @@ def main():
         })
         print(f"[{i}] {cat}: {frase}")
         print(f"    -> {png_path}")
+
+    facto_entry = generate_facto(out_dir)
+    if facto_entry:
+        resumen.append(facto_entry)
 
     resumen_path = os.path.join(out_dir, "resumen.json")
     with open(resumen_path, "w", encoding="utf-8") as f:
