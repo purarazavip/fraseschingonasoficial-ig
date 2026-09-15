@@ -49,13 +49,7 @@ HASHTAGS = {
 BASE_HASHTAGS = "#fraseschingonasoficial #frasesenespanol #reflexiones #frasesdiarias"
 FACTO_HASHTAGS = "#datocurioso #dato #sabiasque #curiosidades"
 
-HOOK_FACTOS = [
-    "Voy a tirar un facto...",
-    "Aqui va un dato que no sabias...",
-    "Dato curioso del dia...",
-    "Esto no te lo esperabas...",
-    "¿Sabias esto?",
-]
+HOOK_FACTO = "Un facto y me voy..."
 
 APERTURAS_FACTO_CAPTION = [
     "Te lo dije, aqui va el facto del dia.",
@@ -497,8 +491,7 @@ def generate_facto(out_dir):
         print("No hay factos disponibles sin usar. Agrega mas al banco.")
         return None
 
-    hook = random.choice(HOOK_FACTOS)
-    html_1 = build_square_html(hook, hint="Desliza para verlo »")
+    html_1 = build_square_html(HOOK_FACTO, hint="Desliza para verlo »")
     html_2 = build_square_html(fact_text)
 
     html_1_path = os.path.join(out_dir, "facto_1.html")
