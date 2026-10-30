@@ -14,12 +14,17 @@ FACTOS_BANCO_PATH = os.path.join(BASE, "factos_banco.json")
 USADAS_FACTOS_PATH = os.path.join(BASE, "usadas_factos.json")
 FONT600 = os.path.join(BASE, "fonts", "caveat600.woff2")
 FONT700 = os.path.join(BASE, "fonts", "caveat700.woff2")
-CHROME = os.environ.get(
-    "CHROME_BIN",
-    "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
-    if os.path.exists("/opt/pw-browsers/chromium-1194/chrome-linux/chrome")
-    else r"C:\Program Files\Google\Chrome\Application\chrome.exe",
-)
+def _find_chrome():
+    import glob
+    candidates = sorted(glob.glob("/opt/pw-browsers/chromium-*/chrome-linux64/chrome")) + \
+        sorted(glob.glob("/opt/pw-browsers/chromium-*/chrome-linux/chrome"))
+    for path in candidates:
+        if os.path.exists(path):
+            return path
+    return r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+
+
+CHROME = os.environ.get("CHROME_BIN", _find_chrome())
 
 HASHTAGS = {
     "mujeres_empoderadas": "#mujeresempoderadas #mujerpoderosa #empoderamientofemenino #mujeresquesuperan",
