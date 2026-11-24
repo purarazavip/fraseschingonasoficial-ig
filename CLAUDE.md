@@ -1,7 +1,7 @@
 # fraseschingonasoficial-ig
 
 Repo que genera el contenido diario para @fraseschingonasoficial (Instagram): 4 posts de frases
-(imagen 1080x1920, fondo negro, fuente Caveat embebida) + un carrusel de "facto" (2 imágenes
+(imagen 1080x1080, fondo negro, fuente Caveat embebida) + un carrusel de "facto" (2 imágenes
 1080x1080, fondo blanco/rojo) con su propio caption. Todo lo genera `generar_lote.py`.
 
 ## Reglas para la corrida diaria automática (Routine "Frases Chingonas - posts diarios IG")
